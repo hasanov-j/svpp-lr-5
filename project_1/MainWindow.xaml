@@ -1,0 +1,59 @@
+﻿<Window x:Class="project_1.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:project_1"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <DockPanel LastChildFill="True">
+        <Menu Height="35" DockPanel.Dock="Top" Background="LightSteelBlue" FontSize="24">
+            <MenuItem Header="Shape" Click="MenuItemShape_Click"/>
+            <MenuItem Header="File">
+                <MenuItem Header="Save" x:Name="menuItemSave" Command="Save"/>
+                <MenuItem Header="Load" x:Name="menuItemLoad" Command="Open"/>
+            </MenuItem>
+            <MenuItem x:Name="menuItemHelp" Header="Help" Command="Help"/>
+            <MenuItem x:Name="menuItemClose" Header="Exit" Command="Close"/>
+        </Menu>
+        <ToolBar DockPanel.Dock="Top" Height="40">
+            <Button x:Name="buttonSave" Background="#00FFFFFF" Command="Save">
+                <Image Source="images/save.png" Width="30" Height="25"  Opacity="0.6"/>
+            </Button>
+            <Button x:Name="buttonOpen" Command="Open">
+                <Image Source="images/load.png" Width="25" Height="25" Opacity="0.6"/>
+            </Button> 
+            <Button x:Name="buttonHelp" Command="Help">
+                <Image Source="images/help.png" Width="30" Height="30" Opacity="0.4"/>
+            </Button> 
+            <Button x:Name="buttonClose" Command="Close">
+                <Image Source="images/exit.png" Width="35" Height="30"/>
+            </Button>
+        </ToolBar>
+        <StatusBar Height="35" Background="LightCyan" DockPanel.Dock="Bottom">
+            <TextBlock x:Name="textBlockCursorPosition" Width="300"/>
+        </StatusBar>
+        <Canvas x:Name="canvas" Background="Beige" MouseDown="canvas_MouseDown" MouseMove="canvas_MouseMove">
+            <Ellipse x:Name="ellipse" Height="250" Width="500" Canvas.Left="270" Canvas.Top="20">
+                <Ellipse.Fill>
+                    <RadialGradientBrush GradientOrigin="0.8,0.5">
+                        <GradientStop Color="Black" Offset="1"/>
+                        <GradientStop Color="Yellow" Offset="0.5"/>
+                        <GradientStop Color="Blue" Offset="0.8"/>
+                        <GradientStop Color="Purple" Offset="0"/>
+                    </RadialGradientBrush>
+                </Ellipse.Fill>
+                <Ellipse.Triggers>
+                    <EventTrigger RoutedEvent="Ellipse.MouseDown">
+                        <BeginStoryboard>
+                            <Storyboard TargetProperty="Fill.GradientStops[2].Color">
+                                <ColorAnimation To="Purple" Duration="0:0:5" AutoReverse="True"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger>
+                </Ellipse.Triggers>
+            </Ellipse>
+        </Canvas>
+
+    </DockPanel>
+</Window>
